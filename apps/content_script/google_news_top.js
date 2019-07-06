@@ -70,7 +70,7 @@ class GoogleNewsTop {
         return "absolute";
     }
     getCssClass() {
-        return "block-google-element";
+        return "block-google-news-top";
     }
 }
 //# sourceMappingURL=google_news_top.js.map

@@ -96,6 +96,6 @@ class GoogleNewsTop implements IBlockable {
     }
 
     public getCssClass(): string {
-        return "block-google-element";
+        return "block-google-news-top";
     }
 }

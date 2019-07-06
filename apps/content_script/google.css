@@ -31,6 +31,13 @@
     margin-bottom: 0;
 }
 
+:not(g-inner-card):not([data-blocker-display=none]) + .block-anchor.block-google-news-top {
+    margin-top: 0;
+    margin-bottom: 0;
+    position: relative;
+    margin-left: 108px; /* width of class="dfhHve" + margin-right of class="NQHJEb" */
+}
+
 /**
  * Anchor immediately after blocked element
  */
