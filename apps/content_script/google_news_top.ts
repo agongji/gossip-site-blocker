@@ -45,14 +45,8 @@ class GoogleNewsTop implements IBlockable {
         this.title = title;
         this.contents = contents;
 
-        // operation insert point
-        const actionMenu = this.element.querySelector(".action-menu");
-
-        if (actionMenu !== null) {
-            this.operationInsertPoint = actionMenu;
-        } else {
-            this.operationInsertPoint = element.querySelector("a")!;
-        }
+        // "YYYY/MM/DD" text.
+        this.operationInsertPoint = element.querySelector("span.fwzPFf")!;
     }
 
     public isIgnoreable() {
