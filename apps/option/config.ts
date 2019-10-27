@@ -20,6 +20,10 @@ interface IOptionRepository {
     menuPosition(): Promise<MenuPosition>;
 
     setMenuPosition(position: string): Promise<void>;
+
+    blockGoogleNews(): Promise<boolean>;
+
+    setBlockGoogleNews(mode: boolean): Promise<void>;
 }
 
 interface IDefaultBlockTypeOption {
@@ -48,6 +52,14 @@ interface IAutoBlockIDNOption {
 
 interface IMenuPositionOption {
     menuPosition: string;
+}
+
+interface IBlockGoogleNewsStorage {
+    blockGoogleNews: IBlockGoogleNews;
+}
+
+interface IBlockGoogleNews {
+    enabled: boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -120,5 +132,18 @@ const OptionRepository: IOptionRepository = {
         await ChromeStorage.save({ menuPosition: position });
 
         Logger.debug("set 'menuPosition' to =>", position);
+    },
+
+    async blockGoogleNews(): Promise<boolean> {
+        const blockGoogleNewsDefault = {enabled: false};
+        const items = await ChromeStorage.get({blockGoogleNews: blockGoogleNewsDefault}) as IBlockGoogleNewsStorage;
+        return items.blockGoogleNews.enabled;
+    },
+
+    async setBlockGoogleNews(mode: boolean): Promise<void> {
+        const blockGoogleNews: IBlockGoogleNews = {enabled: mode};
+        await ChromeStorage.save({blockGoogleNews});
+
+        Logger.log("set 'blockGoogleNews' to =>", blockGoogleNews);
     },
 };

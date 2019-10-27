@@ -10,6 +10,7 @@ const clearButton = document.getElementById('clearButton') as HTMLInputElement;
  * @type {HTMLInputElement}
  */
 const developerCheckbox = document.getElementById('developerCheckbox') as HTMLInputElement;
+const blockGoogleNewsCheckbox = document.getElementById('blockGoogleNewsCheckbox') as HTMLInputElement;
 
 const showBlockedByWordInfoCheckbox = document.getElementById('showBlockedByWordInfoCheckbox') as HTMLInputElement;
 const autoBlockIDNCheckbox = document.getElementById('autoBlockIDNCheckBox') as HTMLInputElement;
@@ -77,6 +78,10 @@ document.addEventListener('DOMContentLoaded', async (ignore) => {
     Logger.log('developerMode is ', developerMode);
     developerCheckbox.checked = developerMode;
 
+    const blockGoogleNews: boolean = await OptionRepository.blockGoogleNews();
+    Logger.log("blockGoogleNews is", blockGoogleNews);
+    blockGoogleNewsCheckbox.checked = blockGoogleNews;
+
     const bannedWordOption: IBannedWordOption = await OptionRepository.getBannedWordOption();
     Logger.debug('bannedWordOption is ', bannedWordOption);
     showBlockedByWordInfoCheckbox.checked = bannedWordOption.showInfo;
@@ -100,7 +105,13 @@ developerCheckbox.addEventListener('click', async (event) => {
     await OptionRepository.setDeveloperMode(checkbox.checked);
 });
 
-showBlockedByWordInfoCheckbox.addEventListener('click', async (event) => {
+blockGoogleNewsCheckbox.addEventListener('click', async (event) => {
+    const checkbox = event.target as HTMLInputElement;
+
+    await OptionRepository.setBlockGoogleNews(checkbox.checked);
+});
+
+showBlockedByWordInfoCheckbox.addEventListener("click", async (event) => {
     const checkbox = event.target as HTMLInputElement;
 
     await OptionRepository.setShowBlockedByWordInfo(checkbox.checked);
