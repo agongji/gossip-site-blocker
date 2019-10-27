@@ -15,10 +15,16 @@ let gsbOptions: IOptions | null = null;
 
 // add observer
 const observer = new MutationObserver((mutations) => {
+    const params = (new URL(document.location.href)).searchParams;
+    const isGoogleNews = params.get('tbm') === 'nws';
+
     mutations.forEach((mutation) => {
         for (const node of mutation.addedNodes) {
             if (node instanceof Element) {
-                if (node.classList.contains('g')) {
+                const childHasCardSection = node.querySelector('.card-section') !== null;
+                const isGroupedNews = isGoogleNews && childHasCardSection;
+
+                if (node.classList.contains('g') && !isGroupedNews) {
                     if (gsbOptions !== null) {
                         tryBlockGoogleElement(node, gsbOptions);
                     } else {
