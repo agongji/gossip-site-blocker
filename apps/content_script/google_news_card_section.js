@@ -26,6 +26,8 @@ class GoogleNewsCardSection {
         else {
             this.operationInsertPoint = element.querySelector("a");
         }
+        // move "View all anchor."
+        this.viewAll = this.element.querySelector(".cWEW3c");
     }
     isIgnoreable() {
         return this.ignoreExplicitly;
@@ -50,6 +52,9 @@ class GoogleNewsCardSection {
     }
     getOperationInsertPoint() {
         return this.operationInsertPoint;
+    }
+    getViewAllElement() {
+        return this.viewAll;
     }
     deleteElement() {
         this.element.parentElement.removeChild(this.element);

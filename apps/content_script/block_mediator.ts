@@ -184,4 +184,8 @@ class BlockMediator implements IBlockMediator {
     public async blockPage(isUrl: boolean, pattern: string, blockType: string): Promise<void> {
         await this.block(isUrl, pattern, blockType);
     }
+
+    public getBlockAnchor(): Element {
+        return this.blockAnchor.getElement();
+    }
 }

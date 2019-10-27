@@ -130,6 +130,15 @@ function blockGoogleNewsCardSection(g1: Element, options: IOptions): boolean {
     }
 
     const mediator = new BlockMediator(g, blockState, options.defaultBlockType, options.menuPosition);
+
+    // move "View all" anchor.
+    const viewAll = g.getViewAllElement();
+    if (viewAll) {
+        const blockAnchor = mediator.getBlockAnchor();
+        Logger.debug("insert viewAll:", viewAll, "after:", blockAnchor);
+        DOMUtils.insertAfter(blockAnchor, viewAll);
+    }
+
     return true;
 }
 

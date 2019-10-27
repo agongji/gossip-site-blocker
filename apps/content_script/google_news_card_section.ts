@@ -3,6 +3,7 @@ class GoogleNewsCardSection implements IBlockable {
     private readonly ignoreExplicitly: boolean;
     private readonly url: string;
     private readonly element: Element;
+    private readonly viewAll: Element | null;
     private readonly title: string;
     private readonly contents: string;
     private readonly operationInsertPoint: Element;
@@ -38,6 +39,9 @@ class GoogleNewsCardSection implements IBlockable {
         } else {
             this.operationInsertPoint = element.querySelector("a")!;
         }
+
+        // move "View all anchor."
+        this.viewAll = this.element.querySelector(".cWEW3c");
     }
 
     public isIgnoreable() {
@@ -70,6 +74,10 @@ class GoogleNewsCardSection implements IBlockable {
 
     public getOperationInsertPoint(): Element {
         return this.operationInsertPoint;
+    }
+
+    public getViewAllElement(): Element | null {
+        return this.viewAll;
     }
 
     public deleteElement() {
