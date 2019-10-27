@@ -21,6 +21,7 @@ class OperationsAnchor {
     constructor(hideAnchor: HideAnchor, blockAnchor: BlockAnchor, changeAnchor: BlockChangeAnchor,
         position: string) {
         this.operationSpan = $.span('', 'block-anchor');
+        this.operationSpan.classList.add('gsb-menu-icon');
         this.hideAnchor = hideAnchor;
         this.blockAnchor = blockAnchor;
         this.changeAnchor = changeAnchor;
