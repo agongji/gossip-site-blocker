@@ -67,6 +67,8 @@ class BlockMediator implements IBlockMediator {
             this.operationDiv.appendChild(this.blockAnchor.getElement());
             this.operationDiv.appendChild(this.changeAnchor.getElement());
             this.operationDiv.classList.add(g.getCssClass());
+            Logger.debug("insert menu. preceded element:", blockTarget.getDOMElement(),
+                ", insert element:", this.operationDiv);
             DOMUtils.insertAfter(blockTarget.getDOMElement(), this.operationDiv);
 
             break;
