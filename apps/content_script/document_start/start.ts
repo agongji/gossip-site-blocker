@@ -30,6 +30,12 @@ const observer = new MutationObserver((mutations) => {
                     } else {
                         pendingsGoogleNewsCardSection.push(node);
                     }
+                } else if (node.matches('div.gG0TJc') && isGoogleNews && isGroupedNews) {
+                    if (gsbOptions !== null) {
+                        tryBlockGoogleNewsTop(node, gsbOptions);
+                    } else {
+                        pendingsGoogleNewsTop.push(node);
+                    }
                 } else if (node.classList.contains('g') && !isGroupedNews) {
                     if (gsbOptions !== null) {
                         tryBlockGoogleElement(node, gsbOptions);
@@ -58,6 +64,7 @@ const pendingsGoogle: Element[] = [];
 const pendingsInnerCard: Element[] = [];
 const pendingsTopNews: Element[] = [];
 const pendingsGoogleNewsCardSection: Element[] = [];
+const pendingsGoogleNewsTop: Element[] = [];
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const blockReasons: BlockReason[] = [];
 const config = { childList: true, subtree: true };
@@ -97,6 +104,10 @@ observer.observe(document.documentElement, config);
 
     for (const node of pendingsGoogleNewsCardSection) {
         tryBlockGoogleNewsCardSection(node, gsbOptions);
+    }
+
+    for (const node of pendingsGoogleNewsTop) {
+        tryBlockGoogleNewsTop(node, gsbOptions);
     }
 })();
 
@@ -146,6 +157,10 @@ function tryBlockGoogleTopNews(node: Element, options: IOptions): void {
 
 function tryBlockGoogleNewsCardSection(node: Element, options: IOptions) {
     tryBlockElement(node, options, blockGoogleNewsCardSection);
+}
+
+function tryBlockGoogleNewsTop(node: Element, options: IOptions) {
+    tryBlockElement(node, options, blockGoogleNewsTop);
 }
 
 document.addEventListener('DOMContentLoaded', () => {

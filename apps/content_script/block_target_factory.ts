@@ -132,3 +132,30 @@ function blockGoogleNewsCardSection(g1: Element, options: IOptions): boolean {
     const mediator = new BlockMediator(g, blockState, options.defaultBlockType, options.menuPosition);
     return true;
 }
+
+function blockGoogleNewsTop(g1: Element, options: IOptions): boolean {
+    const g = new GoogleNewsTop(g1);
+
+    if (g.isIgnoreable()) {
+        return true;
+    }
+
+    if (!g.canBlock()) {
+        return false;
+    }
+
+    const blockState: BlockState = new BlockState(g, options.blockedSites, options.bannedWords, options.regexpList,
+        options.idnOption);
+
+    if (blockState.getState() === "hard") {
+        g.deleteElement();
+        return true;
+    }
+
+    if (blockState.getReason()) {
+        blockReasons.push(blockState.getReason()!);
+    }
+
+    const mediator = new BlockMediator(g, blockState, options.defaultBlockType, options.menuPosition);
+    return true;
+}
