@@ -44,6 +44,13 @@
 }
 
 /**
+ * Grouped Google News.
+ */
+.block-google-news-card-section {
+    margin-top: 0 !important;
+}
+
+/**
  * Background when displaying dialog
  */
 .block-dialog-background {

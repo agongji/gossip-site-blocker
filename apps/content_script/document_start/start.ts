@@ -24,7 +24,13 @@ const observer = new MutationObserver((mutations) => {
                 const childHasCardSection = node.querySelector('.card-section') !== null;
                 const isGroupedNews = isGoogleNews && childHasCardSection;
 
-                if (node.classList.contains('g') && !isGroupedNews) {
+                if (node.matches('div.card-section') && isGoogleNews) {
+                    if (gsbOptions !== null) {
+                        tryBlockGoogleNewsCardSection(node, gsbOptions);
+                    } else {
+                        pendingsGoogleNewsCardSection.push(node);
+                    }
+                } else if (node.classList.contains('g') && !isGroupedNews) {
                     if (gsbOptions !== null) {
                         tryBlockGoogleElement(node, gsbOptions);
                     } else {
@@ -51,6 +57,7 @@ const observer = new MutationObserver((mutations) => {
 const pendingsGoogle: Element[] = [];
 const pendingsInnerCard: Element[] = [];
 const pendingsTopNews: Element[] = [];
+const pendingsGoogleNewsCardSection: Element[] = [];
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const blockReasons: BlockReason[] = [];
 const config = { childList: true, subtree: true };
@@ -86,6 +93,10 @@ observer.observe(document.documentElement, config);
 
     for (const node of pendingsTopNews) {
         tryBlockGoogleTopNews(node, gsbOptions);
+    }
+
+    for (const node of pendingsGoogleNewsCardSection) {
+        tryBlockGoogleNewsCardSection(node, gsbOptions);
     }
 })();
 
@@ -131,6 +142,10 @@ function tryBlockGoogleInnerCard(node: Element, options: IOptions): void {
 
 function tryBlockGoogleTopNews(node: Element, options: IOptions): void {
     tryBlockElement(node, options, blockGoogleTopNews);
+}
+
+function tryBlockGoogleNewsCardSection(node: Element, options: IOptions) {
+    tryBlockElement(node, options, blockGoogleNewsCardSection);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
