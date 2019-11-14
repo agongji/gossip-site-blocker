@@ -21,22 +21,22 @@ const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
         for (const node of mutation.addedNodes) {
             if (node instanceof Element) {
-                const childHasCardSection = node.querySelector('.card-section') !== null;
-                const isGroupedNews = isGoogleNews && childHasCardSection;
+                const isGoogleNewsCardSection = node.matches('div.card-section');
+                const isGoogleNewsTop = node.matches('div.gG0TJc');
 
-                if (node.matches('div.card-section') && isGoogleNews) {
+                if (isGoogleNewsCardSection && isGoogleNews) {
                     if (gsbOptions !== null) {
                         tryBlockGoogleNewsCardSection(node, gsbOptions);
                     } else {
                         pendingsGoogleNewsCardSection.push(node);
                     }
-                } else if (node.matches('div.gG0TJc') && isGoogleNews && isGroupedNews) {
+                } else if (isGoogleNewsTop && isGoogleNews) {
                     if (gsbOptions !== null) {
                         tryBlockGoogleNewsTop(node, gsbOptions);
                     } else {
                         pendingsGoogleNewsTop.push(node);
                     }
-                } else if (node.classList.contains('g') && !isGroupedNews) {
+                } else if (node.classList.contains('g') && !isGoogleNews) {
                     if (gsbOptions !== null) {
                         tryBlockGoogleElement(node, gsbOptions);
                     } else {
