@@ -185,7 +185,7 @@ class BlockMediator implements IBlockMediator {
         await this.block(isUrl, pattern, blockType);
     }
 
-    public getBlockAnchor(): Element {
-        return this.blockAnchor.getElement();
+    public getOperationDiv(): Element {
+        return this.operationDiv;
     }
 }

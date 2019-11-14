@@ -134,7 +134,8 @@ function blockGoogleNewsCardSection(g1: Element, options: IOptions): boolean {
     // move "View all" anchor.
     const viewAll = g.getViewAllElement();
     if (viewAll) {
-        const blockAnchor = mediator.getBlockAnchor();
+        viewAll.classList.add("gsb-view-all-div");
+        const blockAnchor = mediator.getOperationDiv();
         Logger.debug("insert viewAll:", viewAll, "after:", blockAnchor);
         DOMUtils.insertAfter(blockAnchor, viewAll);
     }
